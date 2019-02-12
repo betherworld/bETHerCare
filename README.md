@@ -35,3 +35,8 @@ In another terminal run:
 truffle compile
 truffle deploy --reset
 ```
+
+### Run the backend
+```
+node server/server.js 
+```
