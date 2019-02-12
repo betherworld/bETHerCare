@@ -1,0 +1,24 @@
+{
+  "name": "yup",
+  "version": "1.0.0",
+  "description": "Yet another Unnamed Project for Beth 2019",
+  "main": "server.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danalex97/Yup.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/danalex97/Yup/issues"
+  },
+  "homepage": "https://github.com/danalex97/Yup#readme",
+  "dependencies": {
+  }
+}
