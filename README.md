@@ -16,9 +16,9 @@ Install project dependecies:
 npm install
 ```
 
-To add a dependecy run:
+To add a **new** dependency run:
 ```
-npm install truffle --save
+npm install <dependency> --save
 ```
 
 ### Deploy smart contract
@@ -36,7 +36,7 @@ truffle compile
 truffle deploy --reset
 ```
 
-### Run the backend
+### Transpile and run server
 ```
-node server/server.js 
+npm run-script build && npm run-script start
 ```

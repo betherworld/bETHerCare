@@ -1,7 +1,7 @@
 import Chain from './chain';
 
 // Api class that uses all backend services(e.g. Database, Chain, etc.)
-class Api {
+export default class Api {
   constructor(server) {
     this.server = server;
 
@@ -23,5 +23,3 @@ class Api {
     });
   }
 }
-
-export { Api };
