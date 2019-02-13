@@ -40,3 +40,8 @@ truffle deploy --reset
 ```
 npm run-script build && npm run-script start
 ```
+
+### Start database
+```
+systemctl start mongodb
+```
