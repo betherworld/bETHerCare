@@ -14,7 +14,7 @@ new Api(server).register();
 
 // Main file
 server.get('/', (req, res) => {
-    res.sendFile('dist/index.html');
+    res.sendFile('app/index.html');
 })
 
 // start litening for requests
