@@ -18,8 +18,8 @@ export default class Signer {
   }
 
   // compute the checksum of the message and then sign it
-  // the data we sign should be the donation: (receiver, amount, nonce)
-  sign(receiver, amount, nonce) {
+  // the data we sign should be the donation: (receiver, amount)
+  sign(receiver, amount) {
     const message = receiver + '|' + amount + '|' + nonce;
     const signature = new Crypto().sign(
       new Crypto().hash(message),

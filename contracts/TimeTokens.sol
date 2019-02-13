@@ -35,6 +35,11 @@ contract TimeTokens{
         string clientPk;
     }
 
+    // all the device keys need to be registered in order for people to be able
+    // to tell which transactions are originated from clients that interacted
+    // with devices registered in the system
+    mapping(string => bool) validDeviceKeys;
+
     constructor() public {
         owner = msg.sender;
     }
@@ -80,5 +85,18 @@ contract TimeTokens{
 
         // an event is emmited for the backend to be able to update the balance
         emit NewTransaction( transactions.push(t) );
+    }
+
+    // add a new device: only the owner can do it
+    function addDevice(string memory devicePk) public {
+        if (msg.sender == owner) {
+            // only the backend can register a user, this allows us to keep
+            // the balance
+            validDeviceKeys[devicePk] = true;
+        }
+    }
+
+    function isDeviceValid(string memory devicePk) public view returns(bool) {
+      return validDeviceKeys[devicePk];
     }
 }

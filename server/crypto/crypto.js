@@ -31,4 +31,8 @@ export default class Crypto {
     const checksum = hash.digest('hex');
     return checksum;
   }
+
+  getNonce() {
+    return crypto.randomBytes(64).toString('hex');
+  }
 }
