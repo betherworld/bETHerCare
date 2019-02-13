@@ -12,11 +12,6 @@ const HTML_FILE = path.join(DIST_DIR, 'index.html')
 // register API
 new Api(server).register();
 
-// Main file
-server.get('/', (req, res) => {
-    res.sendFile('app/index.html');
-})
-
 // start litening for requests
 var PORT = 3000;
 server.listen(PORT, function() {
