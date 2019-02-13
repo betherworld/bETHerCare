@@ -1,7 +1,9 @@
 import Crypto from './crypto';
 const crypto = require('crypto');
 
-// the signer should sit on the client side
+// The signer should sit on the client side.
+// The signer needs to create trust for the client when the
+// backend is used to make a time donation.
 export default class Signer {
   constructor() {
     // generate private and public keys
