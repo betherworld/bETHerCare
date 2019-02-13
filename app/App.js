@@ -63,43 +63,40 @@ export default class App extends Component<Props> {
                 <Grid>
                     <Row style={{height: 60}}>
                         <Col style={{ backgroundColor: '#ECECEC'}}>
-                        <Text>From: </Text>
-                        <DatePicker
-                          defaultDate={this.state.startDate}
-                          minimumDate={new Date(2018, 1, 1)}
-                          maximumDate={new Date(2018, 12, 31)}
-                          locale={"de"}
-                          timeZoneOffsetInMinutes={undefined}
-                          modalTransparent={false}
-                          animationType={"fade"}
-                          androidMode={"default"}
-                          //placeHolderText="Select date"
-                          textStyle={{ color: "green" }}
-                          placeHolderTextStyle={{ color: "#d3d3d3" }}
-                          onDateChange={this.setStartDate}
-                          disabled={false}
-                          />
+                            <Text>From: </Text>
+                            <DatePicker
+                                defaultDate={this.state.startDate}
+                                minimumDate={new Date(2018, 1, 1)}
+                                maximumDate={new Date(2018, 12, 31)}
+                                locale={"de"}
+                                timeZoneOffsetInMinutes={undefined}
+                                modalTransparent={false}
+                                animationType={"fade"}
+                                androidMode={"default"}
+                                //placeHolderText="Select date"
+                                textStyle={{ color: "green" }}
+                                placeHolderTextStyle={{ color: "#d3d3d3" }}
+                                onDateChange={this.setStartDate}
+                                disabled={false} />
                         </Col>
                         <Col style={{ backgroundColor: '#ECECEC'}}>
-                        <Text>To: </Text>
-                        <DatePicker
-                          defaultDate={this.state.endDate}
-                          minimumDate={new Date(2018, 1, 1)}
-                          maximumDate={new Date(2018, 12, 31)}
-                          locale={"de"}
-                          timeZoneOffsetInMinutes={undefined}
-                          modalTransparent={false}
-                          animationType={"fade"}
-                          androidMode={"default"}
-                          //placeHolderText="Select date"
-                          textStyle={{ color: "green" }}
-                          placeHolderTextStyle={{ color: "#d3d3d3" }}
-                          onDateChange={this.setEndDate}
-                          disabled={false}
-                        />
+                            <Text>To: </Text>
+                            <DatePicker
+                                defaultDate={this.state.endDate}
+                                minimumDate={new Date(2018, 1, 1)}
+                                maximumDate={new Date(2018, 12, 31)}
+                                locale={"de"}
+                                timeZoneOffsetInMinutes={undefined}
+                                modalTransparent={false}
+                                animationType={"fade"}
+                                androidMode={"default"}
+                                //placeHolderText="Select date"
+                                textStyle={{ color: "green" }}
+                                placeHolderTextStyle={{ color: "#d3d3d3" }}
+                                onDateChange={this.setEndDate}
+                                disabled={false} />
                         </Col>
                     </Row>
-
                     <Row>
                         <Content>
                             <FlatList
@@ -111,12 +108,11 @@ export default class App extends Component<Props> {
                                             <Col><Text>{item.what}</Text></Col>
                                             <Col><Text>{item.hours}h</Text></Col>
                                         </Grid>
-                                    </ListItem>} />
+                                    </ListItem>}
+                            />
                         </Content>
                     </Row>
-
                  </Grid>
-
             </Container>
         );
     }
