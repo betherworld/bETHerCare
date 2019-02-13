@@ -22,7 +22,7 @@ export default class DurationDB extends CollectionProvider {
   // transactions that have start time between start and end
   getDurations(from, start, end) {
     return this.find({
-      from  : from.publicKey,
+      from  : from,
       start : {
         $gte : start,
         $lte : end
