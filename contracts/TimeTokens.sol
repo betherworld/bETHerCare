@@ -2,9 +2,8 @@ pragma solidity ^0.5.0;
 
 contract TimeTokens{
 
-    address public   owner;
+    address public owner;
     event NewTransaction(uint index);
-
 
     mapping(address => userBalance) public balanceOf;
     transaction[] transactions;
@@ -33,6 +32,9 @@ contract TimeTokens{
         }
     }
 
+    function getOwner() public view returns(address){
+        return owner;
+    }
 
     function getBalanceOf(address user) public view returns(uint){
         return balanceOf[user].balance;

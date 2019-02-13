@@ -27,8 +27,11 @@ export default class Api {
     this.server.get('/api/accounts', (req, res) => {
       this.chain.handleAccounts(res);
     });
+    this.server.get('/api/register/:publicKey', (req, res) => {
+      this.chain.handleRegister(res, req.params.publicKey);
+    });
 
-    // front-end connection
+    // TODO: should we expose this?
     this.server.get('/api/user/:publicKey', (req, res) => {
       let who = parseInt(req.params.publicKey);
       this.users.getUser(who).then(user => {
