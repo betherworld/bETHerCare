@@ -7,7 +7,6 @@ export default class Crypto {
     sign.write(message);
     sign.end();
 
-    console.log("Here");
     const signature = sign.sign(privateKey, 'hex');
     console.log(`Signed ${message}`);
 
