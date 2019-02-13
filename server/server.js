@@ -3,7 +3,8 @@ import express from 'express';
 import Api     from './api';
 
 var server = express();
-server.use(express.static('app'));
+// note that now server.js is exposed as well
+server.use(express.static('dist'));
 
 const DIST_DIR = __dirname;
 const HTML_FILE = path.join(DIST_DIR, 'index.html')
@@ -13,7 +14,7 @@ new Api(server).register();
 
 // Main file
 server.get('/', (req, res) => {
-    res.sendFile('app/html/index.html');
+    res.sendFile('dist/index.html');
 })
 
 // start litening for requests
