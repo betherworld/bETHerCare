@@ -18,8 +18,8 @@ contract TimeTokens{
         address receiver;
         uint amount;
         //string description; // TODO: Should we keep this or not?
-        uint256 signature;
-        uint256 publicKey;
+        string signature;
+        string tkp; // thingie public key
     }
 
     constructor() public{
@@ -46,8 +46,9 @@ contract TimeTokens{
         }
     }
 
-    function addTransaction(address donor, address receiver, uint amount, uint256 signature, uint256 publicKey) public {
-        transaction memory t = transaction(donor, receiver, amount, signature, publicKey);
+    // we only need receiver since we always generate currency
+    function addTransaction(address receiver, uint amount, string signature, string tpk) public {
+        transaction memory t = transaction(donor, receiver, amount, signature, tpk);
         emit NewTransaction( transactions.push(t) );
     }
 }

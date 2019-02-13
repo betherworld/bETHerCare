@@ -27,6 +27,7 @@
     "babel-loader": "^8.0.5",
     "babel-preset-env": "^1.7.0",
     "babel-register": "^6.26.0",
+    "crypto": "^1.0.1",
     "expo-cli": "^2.10.1",
     "express": "^4.16.4",
     "html-loader": "^0.5.5",
