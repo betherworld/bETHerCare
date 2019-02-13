@@ -1,5 +1,5 @@
-var Transaction = artifacts.require("./Transaction.sol");
+var TimeTokens = artifacts.require("./TimeTokens.sol");
 
 module.exports = function(deployer) {
-  deployer.deploy(Transaction);
+  deployer.deploy(TimeTokens);
 };
