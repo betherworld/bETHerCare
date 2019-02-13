@@ -48,7 +48,7 @@ contract TimeTokens{
 
     // we only need receiver since we always generate currency
     function addTransaction(address receiver, uint amount, string signature, string tpk) public {
-        transaction memory t = transaction(donor, receiver, amount, signature, tpk);
+        transaction memory t = transaction(receiver, amount, signature, tpk);
         emit NewTransaction( transactions.push(t) );
     }
 }
