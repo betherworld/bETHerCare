@@ -1,0 +1,28 @@
+{
+    "users": [
+        {
+          "public_key": "0x000",
+          "tid": "0x1231231003",
+          "hours": 6,
+          "info": ["Mose", "Müller", "Street"]
+        },
+        {
+          "public_key": "0x001",
+          "tid": "0x1231231003",
+          "hours": 3,
+          "info": ["Philip", "Jordan", "Street"]
+        },
+        {
+          "public_key": "0x002",
+          "tid": "0x1231231003",
+          "hours": 1,
+          "info": ["Alex", "Scheisse", "Street"]
+        },
+        {
+          "public_key": "0x003",
+          "tid": "0x1231231003",
+          "hours": 2,
+          "info": ["Bodim", "Bodi", "Street"],
+        },
+    ]
+}
