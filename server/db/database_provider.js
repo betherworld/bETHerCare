@@ -15,11 +15,22 @@ export default class CollectionProvider extends DatabaseProvider {
     this.col = this.conn.then(db => db.collection(collection));
   }
 
-  // find the first user that satisfies the query
+  // find the first entry that satisfies the query
   findOne(query) {
     return new Promise((resolve, reject) => {
       this.col.then(c => {
         let val = c.findOne(query, (_, res) => {
+          resolve(res);
+        });
+      });
+    });
+  }
+
+  // find array of entries that satisfy query
+  find(query) {
+    return new Promise((resolve, reject) => {
+      this.col.then(c => {
+        let val = c.find(query).toArray((_, res) => {
           resolve(res);
         });
       });

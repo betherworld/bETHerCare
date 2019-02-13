@@ -3,18 +3,6 @@ import CollectionProvider from './database_provider';
 export default class DurationDB extends CollectionProvider {
   constructor() {
     super('durations');
-
-    this.insertMocks();
-  }
-
-  insertMocks() {
-    this.getDurations({publicKey: 0}, 0, 5).then(res => {
-      if (res == null) {
-        this.makeDuration({publicKey: 1}, {publicKey: 1}, 1, 2);
-      } else {
-        console.log(res);
-      }
-    });
   }
 
   // TODO: add total hours on latest duration(?)
@@ -33,7 +21,7 @@ export default class DurationDB extends CollectionProvider {
 
   // transactions that have start time between start and end
   getDurations(from, start, end) {
-    return this.findOne({
+    return this.find({
       from  : from.publicKey,
       start : {
         $gte : start,
