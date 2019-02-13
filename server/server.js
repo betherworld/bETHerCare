@@ -1,7 +1,8 @@
 import path    from 'path';
 import express from 'express';
 import Api     from './api';
-import UserDB from './db/user';
+import UserDB     from './db/user';
+import DurationDB from './db/duration';
 
 var server = express();
 // note that now server.js is exposed as well
@@ -15,6 +16,7 @@ new Api(server).register();
 
 // start database
 new UserDB();
+new DurationDB();
 
 // start litening for requests
 var PORT = 3000;
