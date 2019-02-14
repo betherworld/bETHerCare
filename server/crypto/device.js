@@ -7,7 +7,7 @@ const crypto = require('crypto');
 // public key onto the blockchain.
 export default class Device {
   // the amount should be inferred somehow from the events on device
-  constructor(clientPk, amount) {
+  constructor() {
     // generate private and public keys
     const { privateKey, publicKey } = crypto.generateKeyPairSync('ec', {
       namedCurve: 'sect239k1',
@@ -18,32 +18,40 @@ export default class Device {
     this.privateKey = privateKey;
     this.publicKey = publicKey;
 
-    this.clientPk = clientPk;
-    this.amount   = amount;
+    this.amount   = 0;
+    this.counter  = 0;
   }
 
   // the message that arrives to the validator should be signed
-  sign() {
+  sign(clientPk) {
+
     // to sign the message, together with the nonce
-    const message = this.clientPk + '|' + this.amount;
+    const message = clientPk + '|' + this.exportAmount() + '|' + this.counter;
 
     // get the signature
     const signature = new Crypto().sign(
       new Crypto().hash(message),
       this.privateKey
     );
+
+    // key increases after each signature
+    this.counter += 1;
+
     return signature;
   }
 
-  exportDeviceKey() {
+  exportKey() {
     return this.publicKey;
   }
 
-  exportClientKey() {
-    return this.clientPk;
+  exportCounter() {
+    // this is hard to abuse, since one would need physcially push of a button
+    // more than 2^256 times
+    return this.counter;
   }
 
   exportAmount() {
-    return this.amount;
+    // TODO: this should be done properly on smart device
+    return 5;
   }
 }
