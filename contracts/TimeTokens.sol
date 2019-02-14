@@ -61,7 +61,7 @@ contract TimeTokens{
     }
 
     // ----------------------------- GETTERS -----------------------------------
-    function getOwner() public view returns(address) {
+    function getOwner() public view returns (address) {
         return owner;
     }
 
@@ -89,7 +89,7 @@ contract TimeTokens{
 
     // registration function administered by the backend
     function registerUser(uint256 client, string memory clientPk) public {
-        if(msg.sender == owner) {
+        if (msg.sender == owner) {
             // only the backend can register a client, this allows us to keep
             // the balance
             clients[client].isValid  = true;
