@@ -19,6 +19,11 @@ export default class Client {
     return this.publicKey;
   }
 
+  // export short key
+  shortKey() {
+    return `0x${new Crypto().hash(this.publicKey).toUpperCase()}`;
+  }
+
   sign(clientPk, amount, counter) {
     // to sign the message, together with the nonce
     const message = clientPk + '|' + amount + '|' + counter;

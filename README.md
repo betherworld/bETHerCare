@@ -32,8 +32,7 @@ ganache
 
 In another terminal run:
 ```
-truffle compile
-truffle deploy --reset
+truffle compile && truffle deploy --reset
 ```
 
 ### Transpile and run server

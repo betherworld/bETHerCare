@@ -25,12 +25,20 @@ function msToHMS( ms ) {
 }
 
 export default class App extends Component<Props> {
-
     constructor(props) {
         super(props);
-        this.state = { startDate: new Date(), endDate: new Date() };
         this.setStartDate = this.setStartDate.bind(this);
         this.setEndDate = this.setEndDate.bind(this);
+        this.getUsers = this.getUsers.bind(this);
+
+        this.state = {
+          startDate: new Date(),
+          endDate: new Date(),
+          users : [],
+          trans : []
+        };
+
+        this.fetch("https://");
     }
     setStartDate(newDate) {
         this.setState({ startDate: newDate, endDate: this.state.endDate });

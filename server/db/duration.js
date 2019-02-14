@@ -5,23 +5,23 @@ export default class DurationDB extends CollectionProvider {
     super('durations');
   }
 
-  // TODO: add total hours on latest duration(?)
-  makeDuration(to, start, end, service) {
-    // if not present
+  makeDuration(client, start, end, service) {
     this.col.then(c => {
       c.insertOne({
-        receiver   : to,
+        client     : client,
         begin      : start,
         end        : end,
-        service    : service,
+        info       : {
+          service : service,
+        },
       });
     });
   }
 
   // transactions that have start time between start and end
-  getDurations(to, start, end) {
+  getDurations(client, start, end) {
     return this.find({
-      receiver : to,
+      client : client,
       start : {
         $gte : start,
         $lte : end

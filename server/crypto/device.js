@@ -40,6 +40,12 @@ export default class Device {
     return signature;
   }
 
+  // export short key
+  shortKey() {
+    return `0x${new Crypto().hash(this.publicKey).toUpperCase()}`;
+  }
+
+  // export public key
   exportKey() {
     return this.publicKey;
   }

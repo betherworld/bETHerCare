@@ -12,11 +12,12 @@ const DIST_DIR = __dirname;
 const HTML_FILE = path.join(DIST_DIR, 'index.html')
 
 // register API
-new Api(server).register();
+let mocker = new Mocker();
+mocker.mock();
+new Api(server).register(mocker);
 
 // example signing process
 new Process();
-new Mocker().mock();
 
 // start litening for requests
 var PORT = 3000;

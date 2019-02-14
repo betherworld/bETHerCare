@@ -25,37 +25,49 @@ export default class Mocker {
     this.userDB.insertUser('0xdead', {
       firstName: "Mose",
       lastName: "Müller",
-      address: "Street",
-    }, this.devices[0].exportKey());
+      info: {
+        address: "Street placeholder"
+      },
+    }, this.devices[0].shortKey());
     this.userDB.insertUser('0xbeaf', {
       firstName: "Philip",
       lastName: "Jordan",
-      address: "Street",
-    }, this.devices[1].exportKey());
+      info: {
+        address: "Street placeholder"
+      },
+    }, this.devices[1].shortKey());
   }
 
   generateClients() {
-    this.userDB.insertUser(this.clients[0].exportKey(), {
+    this.userDB.insertUser(this.clients[0].shortKey(), {
       firstName: "Mose",
       lastName: "Müller",
-      address: "Street",
+      info: {
+        address: "Street placeholder"
+      },
     }, null).then(() => {
-      this.userDB.getUser(this.clients[0].exportKey()).then(console.log);
+      this.userDB.getUser(this.clients[0].shortKey()).then(console.log);
     });
-    this.userDB.insertUser(this.clients[1].exportKey(), {
+    this.userDB.insertUser(this.clients[1].shortKey(), {
       firstName: "Philip",
       lastName: "Jordan",
-      address: "Street",
+      info: {
+        address: "Street placeholder"
+      },
     }, null);
-    this.userDB.insertUser(this.clients[2].exportKey(), {
+    this.userDB.insertUser(this.clients[2].shortKey(), {
       firstName: "Alex",
       lastName: "Scheisse",
-      address: "Street",
+      info: {
+        address: "Street placeholder"
+      },
     }, null);
-    this.userDB.insertUser(this.clients[3].exportKey(), {
+    this.userDB.insertUser(this.clients[3].shortKey(), {
       firstName: "Bodim",
       lastName: "Bodi",
-      address: "Street",
+      info: {
+        address: "Street placeholder"
+      },
     }, null);
   }
 
@@ -63,11 +75,11 @@ export default class Mocker {
     let transactions = require('./transactions.json').transactions;
 
     for (let t of transactions) {
-        t.receiver = this.clients[3].exportKey();
+        t.receiver = this.clients[3].shortKey();
     }
-    transactions[0].receiver = this.clients[0].exportKey();
-    transactions[1].receiver = this.clients[1].exportKey();
-    transactions[2].receiver = this.clients[2].exportKey();
+    transactions[0].receiver = this.clients[0].shortKey();
+    transactions[1].receiver = this.clients[1].shortKey();
+    transactions[2].receiver = this.clients[2].shortKey();
 
     for (let t of transactions) {
       this.durationDB.makeDuration(t.receiver, t.begin, t.end, t.service);
