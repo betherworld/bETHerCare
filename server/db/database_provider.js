@@ -15,6 +15,16 @@ export default class CollectionProvider extends DatabaseProvider {
     this.col = this.conn.then(db => db.collection(collection));
   }
 
+  remove() {
+    return new Promise((resolve, reject) => {
+      this.col.then(c => {
+        let val = c.remove({}, (_, res) => {
+          resolve(res);
+        });
+      });
+    });
+  }
+
   // find the first entry that satisfies the query
   findOne(query) {
     return new Promise((resolve, reject) => {

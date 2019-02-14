@@ -2,6 +2,7 @@ import path    from 'path';
 import express from 'express';
 import Api     from './api';
 import Process from './crypto/process';
+import Mocker  from './mocking/mock';
 
 var server = express();
 // note that now server.js is exposed as well
@@ -15,6 +16,7 @@ new Api(server).register();
 
 // example signing process
 new Process();
+new Mocker().mock();
 
 // start litening for requests
 var PORT = 3000;
