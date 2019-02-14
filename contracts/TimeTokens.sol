@@ -127,7 +127,7 @@ contract TimeTokens{
             counter,
             clientSig,
             deviceSig,
-            true
+            false
         );
 
         // an event is emmited for the backend to be able to update the balance
@@ -148,6 +148,9 @@ contract TimeTokens{
               // the balance
               clients[client].maxCounter = counter;
           }
+
+          // validate transaction
+          transactions[index].valid = true;
       }
     }
 }

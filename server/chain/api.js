@@ -1,10 +1,12 @@
 import ChainClient from './client';
 import DeviceClient from './device';
+import TranscationClient from './transaction';
 
 export default class ChainApi {
   constructor() {
     this.client = new ChainClient();
     this.device = new DeviceClient();
+    this.trans  = new TranscationClient();
   }
 
   register(server) {
@@ -40,6 +42,19 @@ export default class ChainApi {
 
     server.get('/api/device/pk/:publicKey', (req, res) => {
       this.client.handlePk(res, req.params.publicKey);
+    });
+
+    // register transcations
+    server.get('/api/transaction/:cpk/:dpk/:amount/:ctr/:csig/:dsig', (req, res) => {
+      this.trans.handleTransaction(
+        res,
+        res.params.cpk,
+        res.params.dpk,
+        res.params.amount,
+        res.params.ctr,
+        res.params.csig,
+        res.params.dsig
+      );
     });
   }
 }
