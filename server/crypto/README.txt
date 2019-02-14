@@ -32,5 +32,10 @@ Possible attack:
  - server replays transaction => can't since it does not have device signature for new counter
  - server uses smart device to replay transaction => can't since it does not have the client signature for new counter
  - rollback attacks => the counter only increases on the blockchain
+ - server excludes transaction => this can be detected by the log of transactions
+
+Powerful attackers:
+ - access to device, user and backend(solution: employees can't make account)
+ - attacker that can tamper with device(solution: make device tamper evident)
 
 Counter is known by smart device since only him can generate new valid transactions.
