@@ -22,10 +22,10 @@ export default class Web3Provider {
   }
 
   handleMethod(conn, method, publicKey, args) {
-    let clientId = `0x${new Crypto().hash(publicKey).toUpperCase()}`;
+    let theId = `0x${new Crypto().hash(publicKey).toUpperCase()}`;
 
     this.owner.then(owner => {
-      this.contract.methods[method](clientId, ...args).send({
+      this.contract.methods[method](theId, ...args).send({
         from : owner,
         gas : this.gas
       }).then(res => conn.send({ok : res.status == '0x1'}));
@@ -33,10 +33,10 @@ export default class Web3Provider {
   }
 
   handleCall(conn, publicKey, method, ret) {
-    let clientId = `0x${new Crypto().hash(publicKey).toUpperCase()}`;
+    let theId = `0x${new Crypto().hash(publicKey).toUpperCase()}`;
 
     this.owner.then(owner => {
-      this.contract.methods[method](clientId).call().then(ret).then(x => {
+      this.contract.methods[method](theId).call().then(ret).then(x => {
           return { ans : x }
       }).then(x =>
         conn.send(x)

@@ -12,12 +12,6 @@ export default class ChainClient extends Web3Provider {
     this.handleMethod(conn, 'registerUser', publicKey, [publicKey]);
   }
 
-  // register a client with a given public key
-  // we assume publicKey is a string
-  handleAddTime(conn, publicKey, amount) {
-    this.handleMethod(conn, 'addTime', publicKey, [amount]);
-  }
-
   handleBalance(conn, publicKey) {
     this.handleCall(conn, publicKey, 'getBalance', parseInt);
   }

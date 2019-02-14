@@ -1,19 +1,16 @@
 import ChainClient from './client';
+import DeviceClient from './device';
 
 export default class ChainApi {
   constructor() {
     this.client = new ChainClient();
+    this.device = new DeviceClient();
   }
 
   register(server) {
     // register client services
     server.get('/api/client/register/:publicKey', (req, res) => {
       this.client.handleRegister(res, req.params.publicKey);
-    });
-
-    // TODO: this should probably not be public
-    server.get('/api/client/addTime/:publicKey/:amount', (req, res) => {
-      this.client.handleAddTime(res, req.params.publicKey, req.params.amount);
     });
 
     server.get('/api/client/balance/:publicKey', (req, res) => {
@@ -29,6 +26,19 @@ export default class ChainApi {
     });
 
     server.get('/api/client/pk/:publicKey', (req, res) => {
+      this.client.handlePk(res, req.params.publicKey);
+    });
+
+    // register device services
+    server.get('/api/device/register/:publicKey', (req, res) => {
+      this.device.handleRegister(res, req.params.publicKey);
+    });
+
+    server.get('/api/device/valid/:publicKey', (req, res) => {
+      this.device.handleValid(res, req.params.publicKey);
+    });
+
+    server.get('/api/device/pk/:publicKey', (req, res) => {
       this.client.handlePk(res, req.params.publicKey);
     });
   }

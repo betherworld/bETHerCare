@@ -47,17 +47,13 @@ contract TimeTokens{
 
         // signature over (receiver, amount, counter) by trusted device
         string deviceSig;
+
+        // if the transaction was validated in the clients mapping
+        bool valid;
     }
 
     constructor() public {
         owner = msg.sender;
-    }
-
-    // balance function administered by backend for faster balance retrieval
-    function addTime(uint256 client, uint amount) public {
-        if (clients[client].isValid && msg.sender == owner) {
-            clients[client].balance += amount;
-        }
     }
 
     // ----------------------------- GETTERS -----------------------------------
@@ -77,12 +73,16 @@ contract TimeTokens{
         return clients[client].clientPk;
     }
 
-    function isDeviceValid(uint256 device) public view returns(bool) {
-      return devices[device].isValid;
-    }
-
     function isClientValid(uint256 client) public view returns(bool) {
       return clients[client].isValid;
+    }
+
+    function getDevicePk(uint256 device) public view returns(string memory) {
+        return devices[device].devicePk;
+    }
+
+    function isDeviceValid(uint256 device) public view returns(bool) {
+      return devices[device].isValid;
     }
 
     // --------------------------- REGISTRATION --------------------------------
@@ -94,16 +94,6 @@ contract TimeTokens{
             // the balance
             clients[client].isValid  = true;
             clients[client].clientPk = clientPk;
-        }
-    }
-
-    // the max counter can be updated only by the owner; anyone who follows
-    // the chain can detect if backend did not process an instruction
-    function updateMaxCounter(uint256 client, uint counter) public {
-        if(msg.sender == owner && counter > clients[client].maxCounter) {
-            // only the backend can register a client, this allows us to keep
-            // the balance
-            clients[client].maxCounter = counter;
         }
     }
 
@@ -136,10 +126,28 @@ contract TimeTokens{
             amount,
             counter,
             clientSig,
-            deviceSig
+            deviceSig,
+            true
         );
 
         // an event is emmited for the backend to be able to update the balance
         emit NewTransaction( transactions.push(t) );
+    }
+
+    // validate transaction
+    function validateTransaction(uint256 client, uint index) public {
+      uint amount = transactions[index].amount;
+      if (clients[client].isValid && msg.sender == owner) {
+          clients[client].balance += amount;
+          uint counter = transactions[index].counter;
+
+          // the max counter can be updated only by the owner; anyone who follows
+          // the chain can detect if backend did not process an instruction
+          if(counter > clients[client].maxCounter) {
+              // only the backend can register a client, this allows us to keep
+              // the balance
+              clients[client].maxCounter = counter;
+          }
+      }
     }
 }
