@@ -1,18 +1,27 @@
 import UserDB from '../db/user';
+import DurationDB from '../db/duration';
 import Device from '../crypto/device';
 import Client from '../crypto/client';
 
 export default class Mocker {
   constructor() {
     this.userDB = new UserDB();
-  }
+    this.durationDB = new DurationDB();
 
-  generateDevices() {
     this.devices = [
       new Device(),
       new Device(),
     ];
 
+    this.clients = [
+      new Client(),
+      new Client(),
+      new Client(),
+      new Client()
+    ];
+  }
+
+  generateDevices() {
     this.userDB.insertUser('0xdead', {
       firstName: "Mose",
       lastName: "Müller",
@@ -26,13 +35,6 @@ export default class Mocker {
   }
 
   generateClients() {
-    this.clients = [
-      new Client(),
-      new Client(),
-      new Client(),
-      new Client()
-    ];
-
     this.userDB.insertUser(this.clients[0].exportKey(), {
       firstName: "Mose",
       lastName: "Müller",
@@ -57,12 +59,31 @@ export default class Mocker {
     }, null);
   }
 
+  generateTransactions() {
+    let transactions = require('./transactions.json').transactions;
+
+    for (let t of transactions) {
+        t.receiver = this.clients[3].exportKey();
+    }
+    transactions[0].receiver = this.clients[0].exportKey();
+    transactions[1].receiver = this.clients[1].exportKey();
+    transactions[2].receiver = this.clients[2].exportKey();
+
+    for (let t of transactions) {
+      this.durationDB.makeDuration(t.receiver, t.begin, t.end, t.service);
+    }
+  }
+
   mock() {
     // clear database
-    this.userDB.remove().then(res => {
+    this.userDB.remove().then(_ => {
       // generate new entries
       this.generateDevices();
       this.generateClients();
+    }).then(() => {
+      this.durationDB.remove().then(_ => {
+        this.generateTransactions()
+      });
     });
   }
 }
