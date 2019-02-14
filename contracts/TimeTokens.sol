@@ -134,6 +134,17 @@ contract TimeTokens{
         emit NewTransaction( transactions.push(t) );
     }
 
+    function getTransaction(uint index) public view returns(
+        string memory,
+        string memory,
+        uint,
+        uint,
+        string memory,
+        string memory) {
+      transaction_t memory t = transactions[index];
+      return (t.clientPk, t.devicePk, t.amount, t.counter, t.clientSig, t.deviceSig);
+    }
+
     // validate transaction
     function validateTransaction(uint256 client, uint index) public {
       uint amount = transactions[index].amount;

@@ -45,7 +45,7 @@ export default class ChainApi {
     });
 
     // register transcations
-    server.get('/api/transaction/:cpk/:dpk/:amount/:ctr/:csig/:dsig', (req, res) => {
+    server.get('/api/transaction/set/:cpk/:dpk/:amount/:ctr/:csig/:dsig', (req, res) => {
       this.trans.handleTransaction(
         res,
         res.params.cpk,
@@ -54,6 +54,14 @@ export default class ChainApi {
         res.params.ctr,
         res.params.csig,
         res.params.dsig
+      );
+    });
+
+    server.get('/api/transaction/get/:cpk/:idx', (req, res) => {
+      this.trans.getTransaction(
+        res,
+        res.params.cpk,
+        res.params.idx
       );
     });
   }
