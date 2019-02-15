@@ -1,5 +1,15 @@
-# Yup
-Yet another Unnamed Project for Beth 2019
+# bETHer Care
+bETHer Care Project for Beth's KISS challenge 2019
+
+### State
+
+What we tried to implement, was that People who want to work with the KISS network could simply track their time on the blockchain with the help of a simple to use device which signs each transaction for the receivers of the work. 
+
+In the future the app should directly interact with the blockchain instead of the backend API. This was not possible as of today because of the transaction costs of the block chain.
+
+We got the communication between the app and the backend api working. The device unfortunately doesn't work for now, since we couldn't get the bluetooth module to work. The Blockchain part kinda works but could be much more improved we tried that with the v2 of the TimeTokens contract which we unfortunately weren't able to finish.
+
+What is still missing is a method to spend or transfer your TimeTokens.
 
 ### Dependecies
 
