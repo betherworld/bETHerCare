@@ -11,6 +11,8 @@ export default class Mocker {
     this.devices = [
       new Device(),
       new Device(),
+      new Device(),
+      new Device(),
     ];
 
     this.clients = [
@@ -22,19 +24,25 @@ export default class Mocker {
   }
 
   generateDevices() {
-    this.userDB.insertUser('0xdead', {
-      firstName: "Mose",
-      lastName: "Müller",
-      info: {
-        address: "Street placeholder"
-      },
+    this.userDB.insertUser(this.devices[0].shortKey(), {
+      firstName: "Hermine",
+      lastName: "Mailhot",
+      address: "2372 Queens Lane"
     }, this.devices[0].shortKey());
-    this.userDB.insertUser('0xbeaf', {
-      firstName: "Philip",
-      lastName: "Jordan",
-      info: {
-        address: "Street placeholder"
-      },
+    this.userDB.insertUser(this.devices[1].shortKey(), {
+      firstName: "Doris",
+      lastName: "Viella",
+      address: "Baldwin Park"
+    }, this.devices[1].shortKey());
+    this.userDB.insertUser(this.devices[2].shortKey(), {
+      firstName: "Avery",
+      lastName: "Rago",
+      address: "272 Queens Gardens"
+    }, this.devices[0].shortKey());
+    this.userDB.insertUser(this.devices[3].shortKey(), {
+      firstName: "Yong",
+      lastName: "Bui",
+      address: "12 Kensington"
     }, this.devices[1].shortKey());
   }
 
@@ -42,32 +50,24 @@ export default class Mocker {
     this.userDB.insertUser(this.clients[0].shortKey(), {
       firstName: "Mose",
       lastName: "Müller",
-      info: {
-        address: "Street placeholder"
-      },
+      address: "73 Tailwater Rd. Macomb"
     }, null).then(() => {
       this.userDB.getUser(this.clients[0].shortKey()).then(console.log);
     });
     this.userDB.insertUser(this.clients[1].shortKey(), {
       firstName: "Philip",
       lastName: "Jordan",
-      info: {
-        address: "Street placeholder"
-      },
+      address: "9253 Shadow Brook Road"
     }, null);
     this.userDB.insertUser(this.clients[2].shortKey(), {
       firstName: "Alex",
       lastName: "Scheisse",
-      info: {
-        address: "Street placeholder"
-      },
+      address: "67 S. Wild Horse Drive"
     }, null);
     this.userDB.insertUser(this.clients[3].shortKey(), {
       firstName: "Bodim",
       lastName: "Bodi",
-      info: {
-        address: "Street placeholder"
-      },
+      address: "37 Mayflower"
     }, null);
   }
 

@@ -8,8 +8,8 @@ export default class DBApi {
   }
 
   register(server) {
-    server.get('/api/user/:publicKey', (req, res) => {
-      let who = parseInt(req.params.publicKey);
+    server.get('/api/user/:user', (req, res) => {
+      let who = req.params.user;
       this.users.getUser(who).then(user => {
         console.log(user);
         res.send(user);
@@ -18,7 +18,7 @@ export default class DBApi {
 
     server.get('/api/duration/:from/:start/:end', (req, res) => {
       this.durations.getDurations(
-          parseInt(req.params.from),
+          req.params.from,
           parseInt(req.params.start),
           parseInt(req.params.end),
       ).then(durations => {

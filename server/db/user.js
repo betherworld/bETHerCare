@@ -27,4 +27,10 @@ export default class UserDB extends CollectionProvider {
       }).then(resolve);
     });
   }
+
+  getUser(client) {
+    return this.findOne({
+      client : client
+    });
+  }
 }
