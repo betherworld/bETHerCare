@@ -5,11 +5,12 @@ import { Container, Header, Content, List, ListItem } from 'native-base';
 import User from './User';
 import Title from './Title';
 
+const SERVER = "http://7d4bd9be.ngrok.io";
+
 export default class HomeScreen extends Component<Props> {
     constructor(props) {
       super(props);
 
-      this.SERVER = "http://7d4bd9be.ngrok.io";
       this.getUsers = this.getUsers.bind(this);
 
       this.state = {
@@ -21,7 +22,7 @@ export default class HomeScreen extends Component<Props> {
     }
 
     getUsers() {
-      fetch(`${this.SERVER}/api/users`).then(res => res.json()).then(res => {
+      fetch(`${SERVER}/api/users`).then(res => res.json()).then(res => {
         this.setState({
           clients : res.clients,
           devices : res.devices
@@ -30,8 +31,8 @@ export default class HomeScreen extends Component<Props> {
     }
 
     render() {
-      let clients = this.state.clients.map(item => <User userKey={item} nav={this.props.navigation}/>);
-      let devices = this.state.devices.map(item => <User userKey={item} nav={this.props.navigation}/>);
+      let clients = this.state.clients.map(item => <User server={SERVER} me={this.state.clients[0]} userKey={item} nav={this.props.navigation}/>);
+      let devices = this.state.devices.map(item => <User server={SERVER} me={this.state.clients[0]} userKey={item} nav={this.props.navigation}/>);
 
       return (<Container>
         <Title/>

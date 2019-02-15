@@ -7,7 +7,6 @@ export default class Ledger extends Component<Props> {
     super(props);
 
     this.state = {};
-    this.getUserData();
   }
 
   getUserData() {

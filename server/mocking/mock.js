@@ -8,6 +8,8 @@ export default class Mocker {
     this.userDB = new UserDB();
     this.durationDB = new DurationDB();
 
+    // Note even the mock should write to the blockchain: we did not have
+    // time for this.
     this.devices = [
       new Device(),
       new Device(),
@@ -97,5 +99,27 @@ export default class Mocker {
         this.generateTransactions()
       });
     });
+  }
+
+  // this functions should not be used in reality, since the client
+  // and device would have the keys.
+  findDevice(dpk) {
+    console.log(dpk);
+    for (let d of this.devices) {
+      console.log(d.shortKey());
+      if (d.shortKey() == dpk) {
+        return d;
+      }
+    }
+    return null;
+  }
+
+  findClient(cpk) {
+    for (let c of this.clients) {
+      if (c.shortKey() == cpk) {
+        return c;
+      }
+    }
+    return null;
   }
 }

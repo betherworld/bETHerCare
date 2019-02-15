@@ -19,7 +19,7 @@ let allActions = [
       num: 2,
   },
   {
-      name: 'Walk dog',
+      name: 'Walk',
       num: 3,
   },
   {
@@ -35,11 +35,11 @@ let allActions = [
       num: 6,
   },
   {
-      name: 'Visit doctor',
+      name: 'Doctor',
       num: 7,
   },
   {
-      name: 'Wash the dishes',
+      name: 'Wash',
       num: 8,
   },
   {
@@ -51,7 +51,7 @@ let allActions = [
       num: 10,
   },
   {
-      name: 'Picking up',
+      name: 'Pickup',
       num: 11,
   },
 ];
@@ -74,7 +74,29 @@ export default class ActionsScreen extends Component {
         this.setState({ boxesChecked: arr });
     }
 
+    checked() {
+      let actions = "";
+      for (let i = 0; i < 12; ++i) {
+        if (this.state.boxesChecked[i]) {
+          actions += allActions[i].name + ',';
+        }
+      }
+      return actions;
+    }
+
+    sign(srv, cli, dev) {
+      let resource = `${srv}/api/sign/${cli}/${dev}/${this.checked()}`;
+      fetch(resource).then(res => res.json()).then(res => {
+        // We should put it on the chain, but we didn't have time to implement it
+        alert(res['ok'] ? "Transcation done" : "Transaction failed");
+      });
+    }
+
     render() {
+        const dev = this.props.navigation.getParam('dev', null);
+        const cli = this.props.navigation.getParam('cli', null);
+        const srv = this.props.navigation.getParam('srv', null);
+
         return (
             <Container>
                 <Title/>
@@ -96,7 +118,7 @@ export default class ActionsScreen extends Component {
                     </Row>
                     <Row size={1}>
                         <Content style={{paddingBottom: 20, paddingLeft: 10, paddingRight: 10}}>
-                        <Button block onPress={() => alert('Yey!')}>
+                        <Button block onPress={() => this.sign(srv, cli, dev)}>
                             <Text style={{color: 'white'}}>Sign</Text>
                         </Button>
                         </Content>
