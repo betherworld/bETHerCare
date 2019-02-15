@@ -16,11 +16,9 @@ export default class DBApi {
       });
     });
 
-    server.get('/api/duration/:from/:start/:end', (req, res) => {
+    server.get('/api/duration/:from', (req, res) => {
       this.durations.getDurations(
           req.params.from,
-          parseInt(req.params.start),
-          parseInt(req.params.end),
       ).then(durations => {
         res.send({
           "durations" : durations

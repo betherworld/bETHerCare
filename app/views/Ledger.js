@@ -1,43 +1,49 @@
 import React, {Component} from 'react';
 import { Container, Header, Content, List, ListItem, Text, Left, Body, Right, Button } from 'native-base';
 import { StackNavigator } from "react-navigation";
+import Title from './Title';
 
-export default class Ledger extends Component<Props> {
+export default class LedgerScreen extends Component<Props> {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.update = this.update.bind(this);
+    this.state = {
+      durations: []
+    };
   }
 
-  getUserData() {
-    fetch(`${this.SERVER}/api/user/${this.props.userKey}`).then(res => res.json()).then(res => {
-      let next = Object.assign(this.state, res);
-      this.setState(next);
+  update(cli, srv) {
+    fetch(`${srv}/api/duration/${cli}`).then(res => res.json()).then(res => {
+      this.setState({
+        durations: res.durations
+      });
     });
   }
 
-  getFullName() {
-    return this.state.info.firstName + ' '+  this.state.info.lastName;
-  }
-
-  handlePress() {
-    if (this.state.info && this.state.tid) {
-      this.nav.navigate("Actions");
-    }
-  }
-
   render() {
-    return (<ListItem numberOfLines={5}>
-      <Body>
-        <Text> {this.state.info ? this.getFullName() : ""}</Text>
-        <Text note numberOfLines={1}> {this.state.info ? this.state.info.address : ""} </Text>
-      </Body>
+    const cli = this.props.navigation.getParam('cli', null);
+    const srv = this.props.navigation.getParam('srv', null);
+    const name = this.props.navigation.getParam('name', null);
 
-      <Right>
-        <Button transparent onPress={() => this.handlePress()}>
-          <Text style={{ color: "lightblue" }}>View</Text>
-        </Button>
-      </Right>
-    </ListItem>);
+    this.update(cli, srv);
+    let views = this.state.durations.map(entry => (<ListItem numberOfLines={5}>
+      <Body>
+        <Text> Start({entry.begin}), End({entry.end}) </Text>
+        <Text note numberOfLines={1}> {entry.info.service} </Text>
+      </Body>
+    </ListItem>));
+
+    return (<Container>
+      <Title/>
+
+      <ListItem itemDevider style={{fontSize: 24}}>
+          <Text>Transactions for: {name}</Text>
+      </ListItem>
+
+      <Content>
+        {views}
+      </Content>
+    </Container>);
   }
 }

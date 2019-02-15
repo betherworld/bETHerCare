@@ -30,6 +30,12 @@ export default class User extends Component<Props> {
         cli: this.props.me,
         srv: this.props.server,
       });
+    } else {
+      this.props.nav.navigate("Ledger", {
+        cli: this.state.client,
+        name: this.getFullName(),
+        srv: this.props.server,
+      });
     }
   }
 

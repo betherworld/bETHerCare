@@ -19,13 +19,9 @@ export default class DurationDB extends CollectionProvider {
   }
 
   // transactions that have start time between start and end
-  getDurations(client, start, end) {
+  getDurations(client) {
     return this.find({
-      client : client,
-      start : {
-        $gte : start,
-        $lte : end
-      }
+       client : client,
     });
   }
 }

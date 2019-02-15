@@ -7,11 +7,13 @@ import { createBottomTabNavigator, createAppContainer } from 'react-navigation';
 
 import HomeScreen from './views/Home';
 import ActionsScreen from './views/Actions';
+import LedgerScreen from './views/Ledger';
 
 const TabNavigator = createBottomTabNavigator(
     {
         Home: HomeScreen,
         Actions: ActionsScreen,
+        Ledger: LedgerScreen,
     },
     {
         defaultNavigationOptions: ({ navigation }) => ({

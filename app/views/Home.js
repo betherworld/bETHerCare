@@ -5,7 +5,7 @@ import { Container, Header, Content, List, ListItem } from 'native-base';
 import User from './User';
 import Title from './Title';
 
-const SERVER = "http://7d4bd9be.ngrok.io";
+const SERVER = "http://c8ea4ee3.ngrok.io";
 
 export default class HomeScreen extends Component<Props> {
     constructor(props) {
