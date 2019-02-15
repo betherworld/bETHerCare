@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
 import { Container, Header, Content, List, ListItem, Text, Left, Body, Right, Button } from 'native-base';
+import { StackNavigator } from "react-navigation";
 
 export default class User extends Component<Props> {
   constructor(props) {
     super(props);
 
+    this.nav = props.nav;
     this.SERVER = "http://7d4bd9be.ngrok.io";
     this.getUserData = this.getUserData.bind(this);
 
@@ -23,6 +25,12 @@ export default class User extends Component<Props> {
     return this.state.info.firstName + ' '+  this.state.info.lastName;
   }
 
+  handlePress() {
+    if (this.state.info && this.state.tid) {
+      this.nav.navigate("Actions");
+    }
+  }
+
   render() {
     return (<ListItem numberOfLines={5}>
       <Body>
@@ -31,7 +39,7 @@ export default class User extends Component<Props> {
       </Body>
 
       <Right>
-        <Button transparent>
+        <Button transparent onPress={() => this.handlePress()}>
           <Text style={{ color: "lightblue" }}>View</Text>
         </Button>
       </Right>
